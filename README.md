@@ -53,8 +53,10 @@ run_analysis <- function()
     ## initialize the second data set  
     SecondData <- data.frame(matrix(ncol = length(allvariables),   
                                   nrow = length(subjects) * length(activities)))  
-    names(SecondData) <- allvariables  
-    
+    names(SecondData)[1:2] <- allvariables[1:2]
+    names(SecondData)[3:length(allvariables)] <- sapply(allvariables[3:length(allvariables)], 
+                                                        f <- function(x) paste0("avg_",x)) 
+      
     i <- 1  
     while (i <= length(subjects))  
     {  
@@ -101,7 +103,9 @@ X_merged_data <- rbind(X_train_data,X_test_data)
     ## initialize the second data set  
     SecondData <- data.frame(matrix(ncol = length(allvariables),   
                                   nrow = length(subjects) * length(activities)))  
-    names(SecondData) <- allvariables  
+    names(SecondData)[1:2] <- allvariables[1:2]
+    names(SecondData)[3:length(allvariables)] <- sapply(allvariables[3:length(allvariables)], 
+                                                        f <- function(x) paste0("avg_",x))   
     
     i <- 1  
     while (i <= length(subjects))  
