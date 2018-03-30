@@ -1,27 +1,27 @@
 # Data-Science-Course-4-Project
-This is the repository for the Data Science Course 4 Project.  
+This is the documentation for the Data Science Course 4 Project.  
   
 ## run_analysis.R 
 The following is my code to perform the required task. SecondData is the required output data set.  
   
 run_analysis <- function()  
 {  
-  \## Read in the data.  
-  \## Data files are stored in "Project/getdata_projectfiles_UCI HAR Dataset/UCI HAR Dataset".  
-  \## My working directory is "Project".  
-  DataDir <- "getdata_projectfiles_UCI HAR Dataset/UCI HAR Dataset"  
+    \## Read in the data.  
+    \## Data files are stored in "Project/getdata_projectfiles_UCI HAR Dataset/UCI HAR Dataset".  
+    \## My working directory is "Project".  
+    DataDir <- "getdata_projectfiles_UCI HAR Dataset/UCI HAR Dataset"  
     
-  features <- read.table(paste0(DataDir,"/features.txt"))  
-  features <- as.character(features$V2)  
-  colomns <- grep("mean|std",features)  
+    features <- read.table(paste0(DataDir,"/features.txt"))  
+    features <- as.character(features$V2)  
+    colomns <- grep("mean|std",features)  
     
-  activity_labels <- read.table(paste0(DataDir,"/activity_labels.txt"))  
-  activity_labels <- activity_labels$V2  
+    activity_labels <- read.table(paste0(DataDir,"/activity_labels.txt"))  
+    activity_labels <- activity_labels$V2  
     
-  X_train_data <- read.table(paste0(DataDir,"/train/X_train.txt"))  
-  X_train_data <- X_train_data[,colomns]  
-  \## Add in the activity types  
-  y_train_data <- read.table(paste0(DataDir,"/train/y_train.txt"))  
+    X_train_data <- read.table(paste0(DataDir,"/train/X_train.txt"))  
+    X_train_data <- X_train_data[,colomns]  
+    \## Add in the activity types  
+    y_train_data <- read.table(paste0(DataDir,"/train/y_train.txt"))  
   y_train_data <- sapply(y_train_data, f <- function(x) activity_labels[x])  
   X_train_data <- cbind(y_train_data, X_train_data)  
   \## Add in the subjects  
@@ -45,13 +45,13 @@ run_analysis <- function()
   \## Merge the training and test sets  
   X_merged_data <- rbind(X_train_data,X_test_data)  
     
-  /## From X_merged_data, create a second, independent tidy data set with  
-  /## the average of each variable for each activity and each subject  
+  \## From X_merged_data, create a second, independent tidy data set with  
+  \## the average of each variable for each activity and each subject  
   subjects <- sort(unique(X_merged_data$Subject))  
   activities <- as.character(unique(X_merged_data$Activity))  
   allvariables <- names(X_merged_data) ## include Subject & Activity  
     
-  /## initialize the second data set  
+  \## initialize the second data set  
   SecondData <- data.frame(matrix(ncol = length(allvariables),   
                                   nrow = length(subjects) * length(activities)))  
   names(SecondData) <- allvariables  
@@ -73,6 +73,6 @@ run_analysis <- function()
     i <- i + 1  
   }  
     
-  /## return the new data set  
+  \## return the new data set  
   SecondData  
 }  
