@@ -1,13 +1,13 @@
 # Data-Science-Course-4-Project
-This is the repository for the Data Science Course 4 Project
+This is the repository for the Data Science Course 4 Project  
 
-run_analysis <- function()
-{
-  \## Read in the data.
-  \## Data files are stored in "Project/getdata_projectfiles_UCI HAR Dataset/UCI HAR Dataset".
-  \## My working directory is "Project".
-  DataDir <- "getdata_projectfiles_UCI HAR Dataset/UCI HAR Dataset"
-  
+run_analysis <- function()  
+{  
+  \## Read in the data.  
+  \## Data files are stored in "Project/getdata_projectfiles_UCI HAR Dataset/UCI HAR Dataset".  
+  \## My working directory is "Project".  
+  DataDir <- "getdata_projectfiles_UCI HAR Dataset/UCI HAR Dataset"  
+    
   features <- read.table(paste0(DataDir,"/features.txt"))
   features <- as.character(features$V2)
   colomns <- grep("mean|std",features)
