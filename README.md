@@ -79,7 +79,47 @@ run_analysis <- function()
   
 ## How the code works
 ### Firstly, data are read into the following variables (trimmed to keep the data of interest).
-* features: stores all features
+* features: stores all features, data from "feature.txt"
 * colomns: stores all the features of interest (all means and all stds)
-* activity_labels: stores all the labels for different activities (SITTING, STANDING, etc.)
-* 
+* activity_labels: stores all the labels for different activities (SITTING, STANDING, etc.), data from "activity_labels.txt"
+* X_train_data: stores the data from the training data set, variables are given descriptive names, a column containing activities and a column containing subjects are also added to it, data from "X_train.txt"
+* X_test_data: stores the data from the test data set, variables are given descriptive names, a column containing activities and a column containing subjects are also added to it, data from "X_test.txt"
+
+### Secondly, the training set data and test set data are merged
+```
+X_merged_data <- rbind(X_train_data,X_test_data)
+```
+
+### Lastly, a new tidy data set is created by averaging each variable for each activity and each subject in X_merged_data
+```
+    ## From X_merged_data, create a second, independent tidy data set with  
+    ## the average of each variable for each activity and each subject  
+    subjects <- sort(unique(X_merged_data$Subject))  
+    activities <- as.character(unique(X_merged_data$Activity))  
+    allvariables <- names(X_merged_data) ## include Subject & Activity  
+    
+    ## initialize the second data set  
+    SecondData <- data.frame(matrix(ncol = length(allvariables),   
+                                  nrow = length(subjects) * length(activities)))  
+    names(SecondData) <- allvariables  
+    
+    i <- 1  
+    while (i <= length(subjects))  
+    {  
+        subject_data <- X_merged_data[X_merged_data$Subject==subjects[i],]  
+        j <- 1  
+        while (j <= length(activities))  
+        {  
+            SecondData[(i-1)*length(activities)+j,1] <- subjects[i]  
+            SecondData[(i-1)*length(activities)+j,2] <- activities[j]  
+            subject_activity_data <- subject_data[subject_data$Activity == activities[j],]  
+            means <- colMeans(subject_activity_data[,3:length(allvariables)])  
+            SecondData[(i-1)*j+j, 3:length(allvariables)] <- means  
+            j <- j + 1  
+        }  
+        i <- i + 1  
+    }  
+    
+    ## return the new data set  
+    SecondData 
+```
