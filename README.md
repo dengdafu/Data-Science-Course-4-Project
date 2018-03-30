@@ -76,3 +76,10 @@ run_analysis <- function()
     SecondData  
 }  
 ```
+  
+## How the code works
+### Firstly, data are read into the following variables (trimmed to keep the data of interest).
+* features: stores all features
+* colomns: stores all the features of interest (all means and all stds)
+* activity_labels: stores all the labels for different activities (SITTING, STANDING, etc.)
+* 
