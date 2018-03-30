@@ -68,7 +68,7 @@ run_analysis <- function()
             SecondData[(i-1)*length(activities)+j,2] <- activities[j]  
             subject_activity_data <- subject_data[subject_data$Activity == activities[j],]  
             means <- colMeans(subject_activity_data[,3:length(allvariables)])  
-            SecondData[(i-1)*j+j, 3:length(allvariables)] <- means  
+            SecondData[(i-1)*length(activities)+j, 3:length(allvariables)] <- means 
             j <- j + 1  
         }  
         i <- i + 1  
@@ -118,7 +118,7 @@ X_merged_data <- rbind(X_train_data,X_test_data)
             SecondData[(i-1)*length(activities)+j,2] <- activities[j]  
             subject_activity_data <- subject_data[subject_data$Activity == activities[j],]  
             means <- colMeans(subject_activity_data[,3:length(allvariables)])  
-            SecondData[(i-1)*j+j, 3:length(allvariables)] <- means  
+            SecondData[(i-1)*length(activities)+j, 3:length(allvariables)] <- means
             j <- j + 1  
         }  
         i <- i + 1  
