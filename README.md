@@ -3,18 +3,17 @@ This is the documentation for the Data Science Course 4 Project.
   
 ## run_analysis.R 
 The following is my code to perform the required task. SecondData is the required output data set.  
-  
+```
 run_analysis <- function()  
 {  
     \## Read in the data.  
     \## Data files are stored in "Project/getdata_projectfiles_UCI HAR Dataset/UCI HAR Dataset".  
     \## My working directory is "Project".  
     DataDir <- "getdata_projectfiles_UCI HAR Dataset/UCI HAR Dataset"  
-    
+      
     features <- read.table(paste0(DataDir,"/features.txt"))  
     features <- as.character(features$V2)  
     colomns <- grep("mean|std",features)  
-    
     activity_labels <- read.table(paste0(DataDir,"/activity_labels.txt"))  
     activity_labels <- activity_labels$V2  
     
@@ -76,3 +75,4 @@ run_analysis <- function()
   \## return the new data set  
   SecondData  
 }  
+```
